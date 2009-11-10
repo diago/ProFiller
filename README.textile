@@ -15,9 +15,9 @@ h3. Callbacks
 
 There are two included callbacks
 
-|_. Calback |_. Description |
-| onStart | triggered when FormFiller#fill is called |
-| onComplete | triggered after the form has been filled |
+|_. Calback |_. Parameters |_. Description |
+| onStart | form | triggered when FormFiller#fill is called |
+| onComplete | form | triggered after the form has been filled |
 
 Pass the callbacks in as options during instantiation.
 

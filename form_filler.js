@@ -29,9 +29,9 @@ var FormFiller = Class.create( {
 
 		this.form = $(form);
 		// stores the form as is
-	this.initialData = this.form.serialize( {
-		hash : true
-	});
+		this.initialData = this.form.serialize( {
+			hash : true
+		});
 
 	},
 	/**
@@ -39,12 +39,7 @@ var FormFiller = Class.create( {
 	 */
 	fill : function(data) {
 	
-		if (this.timeout) {
-			window.clearTimeout(this.timeout);
-		} else {
-			this.options.onStart(this);
-			this.hide();
-		}
+		this.options.onStart(this.form);
 	
 		for ( var x in data) {
 			var elm = $(x);
@@ -60,7 +55,7 @@ var FormFiller = Class.create( {
 	
 		}
 	
-		this.timeout = this.show.bind(this).delay(.2);
+		this.options.onComplete(this.form);
 	
 	},
 	
