@@ -30,7 +30,7 @@ In order to fill **checkboxes** you need to follow these guidelines. Example che
 	<input id="vehicle[Airplane]" type="checkbox" name="vehicle[]" value="Airplane" />
 </code></pre>
 
-Notice the id's contain the value of the element in brackets letter for letter and in the same case.
+Notice the id's contain the __name__ of the input with brackets. It doesn't matter what is in the brackets as long as each ID is unique.
 
 h3. Callbacks
 
