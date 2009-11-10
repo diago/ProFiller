@@ -28,6 +28,7 @@
 		<p>
 			<label for="age">Age:</label>
 			<select id="age" name="age">
+				<option value="0">-- Please Select --</option>
 				<option value="10-15" >10 - 15</option>
 				<option value="16-20" >16 - 20</option>
 				<option value="21+">21+</option>
@@ -40,6 +41,17 @@
 			<input name="sex" id="sexMale" type="radio" value="male" /> Male
 			<br />
 			<input name="sex" id="sexFemale" type="radio" value="female" /> Female
+		</p>
+
+		<p>
+			I have a bike:
+			<input id="vehicle[Bike]" type="checkbox" name="vehicle[]" value="Bike" />
+			<br />
+			I have a car:
+			<input id="vehicle[Car]" type="checkbox" name="vehicle[]" value="Car" />
+			<br />
+			I have an airplane:
+			<input id="vehicle[Airplane]" type="checkbox" name="vehicle[]" value="Airplane" />
 		</p>
 		
 		<p>

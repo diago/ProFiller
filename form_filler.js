@@ -28,32 +28,33 @@ var FormFiller = Class.create( {
 		}, options || {});
 
 		this.form = $(form);
+		
 		// stores the form as is
 		this.initialData = this.form.serialize( {
 			hash : true
 		});
-
+		
 	},
 	/**
 	 * Fills the form with the supplied data
 	 */
 	fill : function(data) {
 	
+		this.data = $H(data);
+		
 		this.options.onStart(this.form);
-	
-		var elem, type;
-		for ( var x in data) {
-			elem = $(x);
-	
-			if (elem) {
-				this.elem = elem;
-				this.value = data[x] == null ? '' : data[x];
-				type = '_' + elem.tagName.toLowerCase();
-	
-				this[type]();
-			}
-	
-		}
+
+		// used to run through and fill
+		// this is here to recheck for dynamically added elements
+		this.elements = this.form.getElements();
+
+		var type;
+		this.elements.each(function(elem){
+			this.elem = $(elem);
+			this.id = this.elem.identify();
+			type = '_' + this.elem.tagName.toLowerCase();
+			this[type]();
+		}.bind(this));
 	
 		this.options.onComplete(this.form);
 	
@@ -66,16 +67,21 @@ var FormFiller = Class.create( {
 		this.fill(this.initialData);
 	},
 	
+	_find: function(id){
+		var data = id || this.id;
+		return this.data.get(data) || false;		
+	},
+	
 	_input : function() {
 
 		switch(this.elem.readAttribute('type').toLowerCase()){
 		case 'radio' :
-			this.elem.checked = this.elem.readAttribute('value') == this.value;
+			this.elem.checked = this._find();
 			break;
 			
 		default :
-			this.elem.value = this.value;
-			this.elem.writeAttribute('value', this.value);	
+			this.elem.value = this._find();
+			this.elem.writeAttribute('value', this._find());	
 			break;
 		}
 	
@@ -83,11 +89,12 @@ var FormFiller = Class.create( {
 	
 	_select : function() {
 	
+		var value = this._find();
 		var options = $A(this.elem.options);
 	
 		options.each(function(o) {
 	
-			if (o.value == this.value) {
+			if (o.value == value) {
 	
 				o.selected = true;
 	
