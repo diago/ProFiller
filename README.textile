@@ -15,7 +15,9 @@ Form Filler is straight forward. Instantiate the class with the id of the form a
 
 h2. Required ID's
 
-In order to fill checkboxes and other multiselect items you need to follow these guidelines. Example checkbox input:
+ID's for the form elements should be the same as the name. This can be an issue for **multiselect** boxes but FormFiller will handle those fine. Most backends require a name[] to receive an array of values for these elements. 
+
+In order to fill **checkboxes** you need to follow these guidelines. Example checkbox input:
 
 <pre><code class="html">
 	I have a bike:
@@ -28,7 +30,7 @@ In order to fill checkboxes and other multiselect items you need to follow these
 	<input id="vehicle[Airplane]" type="checkbox" name="vehicle[]" value="Airplane" />
 </code></pre>
 
-Notice the id's contain the value of the element in brackets letter for letter (same case).
+Notice the id's contain the value of the element in brackets letter for letter and in the same case.
 
 h3. Callbacks
 
