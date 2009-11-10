@@ -1,5 +1,7 @@
 h1. Form Filler
 
+h2. Description
+
 Form Filler is used to autocomplete a form using a JSON obect. It requires the Prototype Javascript Framework version 1.6.1 which can be obtained at http://www.prototypejs.org.
 
 h2. Usage
@@ -10,6 +12,23 @@ Form Filler is straight forward. Instantiate the class with the id of the form a
   var filler = new FormFiller('formId');
   filler.fill(jsonObject);
 </code></pre>
+
+h2. Required ID's
+
+In order to fill checkboxes and other multiselect items you need to follow these guidelines. Example checkbox input:
+
+<pre><code class="html">
+	I have a bike:
+	<input id="vehicle[Bike]" type="checkbox" name="vehicle[]" value="Bike" />
+	<br />
+	I have a car:
+	<input id="vehicle[Car]" type="checkbox" name="vehicle[]" value="Car" />
+	<br />
+	I have an airplane:
+	<input id="vehicle[Airplane]" type="checkbox" name="vehicle[]" value="Airplane" />
+</code></pre>
+
+Notice the id's contain the value of the element in brackets letter for letter (same case).
 
 h3. Callbacks
 
