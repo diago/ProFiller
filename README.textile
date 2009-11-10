@@ -1,0 +1,40 @@
+h1. Form Filler
+
+Form Filler is used to autocomplete a form using a JSON obect. It requires the Prototype Javascript Framework version 1.6.1 which can be obtained at http://www.prototypejs.org.
+
+h2. Usage
+
+Form Filler is straight forward. Instaniate the class with the id of the form and use the fill method to populate.
+
+<pre><code class="html">
+  var filler = new FormFiller('formId');
+  filler.fill(jsonObject);
+</code></pre>
+
+h3. Callbacks
+
+There are two included callbacks
+
+|_. Calback |_. Description |
+| onStart | triggered when FormFiller#fill is called |
+| onComplete | triggered after the form has been filled |
+
+Pass the callbacks in as options during instantiation.
+
+<pre><code  class="html">
+  var filler = new FormFiller('formId', {
+    onStart: function(){
+      showAjaxLoader();
+    },
+    onComplete: function(){
+      hideAjaxLoader();
+    }
+  });  
+  filler.fill(jsonObject);
+</code></pre>
+
+h3. Methods
+
+|_. Method |_. Description | 
+| FormFiller#fill | Used to populate the form with the supplied JSON object |
+| FormFiller#reset | Resets the form to the forms original values (values taken when FormFiller was instaniated) |
