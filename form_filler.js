@@ -65,7 +65,7 @@ var FormFiller = Class.create( {
 	 * Reset the form with the initial data
 	 */
 	reset : function() {
-		this.fill(this.initialData);
+		this.form.reset();
 	},
 	
 	_find: function(id){
@@ -93,22 +93,27 @@ var FormFiller = Class.create( {
 			this.elem.checked = this._find();
 			break;
 			
-		default :
+		case 'text' :
 			this.elem.value = this._find();
-			this.elem.writeAttribute('value', this._find());	
 			break;
 		}
 	
 	},
 	
 	_select : function() {
-	
-		var value = this._find();
-		var options = $A(this.elem.options);
-	
+		
+		var value;
+		var values = [];
+		if(this.elem.multiple){
+			values = this._find();
+		} else {
+			value = this._find();
+		}
+
+		var options = $A(this.elem.options);	
 		options.each(function(o) {
 	
-			if (o.value == value) {
+			if (o.value == value || $A(values).indexOf(o.value) !== -1) {
 	
 				o.selected = true;
 	
@@ -120,7 +125,7 @@ var FormFiller = Class.create( {
 	
 	_textarea : function() {
 	
-		this.elem.update(this.value);
+		this.elem.value = this._find();
 	
 	}
 });

@@ -10,13 +10,35 @@
 		<script type="text/javascript">
 
 			document.observe('dom:loaded', function(){
-				var json = {"fullName": "Heath Padrick", "age": "21+", "sexMale": "male", "vehicle": ["Bike", "Airplane"]};
+				var json = {
+						"fullName": "Heath Padrick", 
+						"age": "21+", "sexMale": "male", 
+						"vehicle": ["Bike", "Airplane"],
+						"networks": ["GitHub"],
+						"comments": "This is all of my comment"
+							};
 				
-				var filler = new FormFiller('myForm').fill(json);
+				var filler = new FormFiller('myForm');
+
+				$('fill').observe('click', function(ev){
+					ev.stop();
+
+					filler.fill(json);
+				});
+
+				$('reset').observe('click', function(ev){
+					ev.stop();
+
+					filler.reset();
+				});
 			});
 		</script>
     </head>
 	<body>
+
+	<p>
+		<a id="fill" href="#">Click to Fill</a> | <a id="reset" href="#">Click to Reset</a>
+	</p>
 
 	<form id="myForm" action="" method="post" >
 	
@@ -44,6 +66,17 @@
 		</p>
 
 		<p>
+			<label for="networks">Networks:</label>
+			<select id="networks" name="networks[]" multiple="multiple">
+				<option value="0">-- Please Select --</option>
+				<option value="MySpace" >MySpace</option>
+				<option value="Facebook" >Facebook</option>
+				<option value="Twitter">Twitter</option>
+				<option value="GitHub">GitHub</option>				
+			</select>
+		</p>
+
+		<p>
 			I have a bike:
 			<input id="vehicle[Bike]" type="checkbox" name="vehicle[]" value="Bike" />
 			<br />
@@ -53,10 +86,15 @@
 			I have an airplane:
 			<input id="vehicle[Airplane]" type="checkbox" name="vehicle[]" value="Airplane" />
 		</p>
-		
+
+		<p>Comments:</p>
+		<textarea id="comments" name="comments" rows="5" cols="70"></textarea>
+	
 		<p>
 			<input id="submit" name="Submit" type="submit" value="Submit" />
 		</p>
+	
+
 	
 	</form>
 	
