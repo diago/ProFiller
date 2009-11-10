@@ -58,4 +58,4 @@ h3. Methods
 
 |_. Method |_. Description | 
 | FormFiller#fill | Used to populate the form with the supplied JSON object |
-| FormFiller#reset | Resets the form to the forms original values (values taken when FormFiller was instantiated) |
+| FormFiller#reset | Resets the form to the forms original values (uses Prototypes Form#reset) |
