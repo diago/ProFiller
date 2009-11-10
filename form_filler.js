@@ -29,11 +29,6 @@ var FormFiller = Class.create( {
 
 		this.form = $(form);
 		
-		// stores the form as is
-		this.initialData = this.form.serialize( {
-			hash : true
-		});
-		
 	},
 	/**
 	 * Fills the form with the supplied data
