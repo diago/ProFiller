@@ -41,14 +41,14 @@ var FormFiller = Class.create( {
 	
 		this.options.onStart(this.form);
 	
+		var elem, type;
 		for ( var x in data) {
-			var elm = $(x);
-			var type;
+			elem = $(x);
 	
-			if (elm) {
-				this.elm = elm;
+			if (elem) {
+				this.elem = elem;
 				this.value = data[x] == null ? '' : data[x];
-				type = '_' + elm.tagName.toLowerCase();
+				type = '_' + elem.tagName.toLowerCase();
 	
 				this[type]();
 			}
@@ -68,14 +68,14 @@ var FormFiller = Class.create( {
 	
 	_input : function() {
 	
-		this.elm.value = this.value;
-		this.elm.writeAttribute('value', this.value);
+		this.elem.value = this.value;
+		this.elem.writeAttribute('value', this.value);
 	
 	},
 	
 	_select : function() {
 	
-		var options = $A(this.elm.options);
+		var options = $A(this.elem.options);
 	
 		options.each(function(o) {
 	
@@ -91,7 +91,7 @@ var FormFiller = Class.create( {
 	
 	_textarea : function() {
 	
-		this.elm.update(this.value);
+		this.elem.update(this.value);
 	
 	}
 });
