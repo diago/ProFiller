@@ -4,7 +4,7 @@ Form Filler is used to autocomplete a form using a JSON obect. It requires the P
 
 h2. Usage
 
-Form Filler is straight forward. Instaniate the class with the id of the form and use the fill method to populate.
+Form Filler is straight forward. Instantiate the class with the id of the form and use the fill method to populate.
 
 <pre><code class="html">
   var filler = new FormFiller('formId');
@@ -37,4 +37,4 @@ h3. Methods
 
 |_. Method |_. Description | 
 | FormFiller#fill | Used to populate the form with the supplied JSON object |
-| FormFiller#reset | Resets the form to the forms original values (values taken when FormFiller was instaniated) |
+| FormFiller#reset | Resets the form to the forms original values (values taken when FormFiller was instantiated) |
