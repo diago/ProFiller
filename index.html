@@ -10,7 +10,7 @@
 		<script type="text/javascript">
 
 			document.observe('dom:loaded', function(){
-				var json = {"fullName": "Heath Padrick", "age": "21+"};
+				var json = {"fullName": "Heath Padrick", "age": "21+", "sexMale": "male"};
 				
 				var filler = new FormFiller('myForm').fill(json);
 			});
@@ -21,17 +21,25 @@
 	<form id="myForm" action="" method="post" >
 	
 		<p>
-			<label>Name:</label>
+			<label for="fullName">Name:</label>
 			<input name="fullName" id="fullName" type="text" value="" />
 		</p>
 		
 		<p>
-			<label>Age:</label>
+			<label for="age">Age:</label>
 			<select id="age" name="age">
 				<option value="10-15" >10 - 15</option>
 				<option value="16-20" >16 - 20</option>
 				<option value="21+">21+</option>
 			</select>
+		</p>
+		
+		<p>
+			<label for="sex">Sex:</label>
+			<br />
+			<input name="sex" id="sexMale" type="radio" value="male" /> Male
+			<br />
+			<input name="sex" id="sexFemale" type="radio" value="female" /> Female
 		</p>
 		
 		<p>

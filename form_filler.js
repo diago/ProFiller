@@ -67,9 +67,17 @@ var FormFiller = Class.create( {
 	},
 	
 	_input : function() {
-	
-		this.elem.value = this.value;
-		this.elem.writeAttribute('value', this.value);
+
+		switch(this.elem.readAttribute('type').toLowerCase()){
+		case 'radio' :
+			this.elem.checked = this.elem.readAttribute('value') == this.value;
+			break;
+			
+		default :
+			this.elem.value = this.value;
+			this.elem.writeAttribute('value', this.value);	
+			break;
+		}
 	
 	},
 	
