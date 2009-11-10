@@ -66,8 +66,8 @@ var FormFiller = Class.create( {
 	_find: function(id){
 		var id = id || this.id;
 		var data = this.data.get(id) || false;
-		if(!data && this.id.endsWith(']')){
-			var exp = new RegExp("\\[.*\\]$");
+		if(!data && this.id.include('::')){
+			var exp = new RegExp("\\:\\:.*$");
 			var real_id = this.id.sub(exp, '');
 			data = this._find(real_id);
 		}
