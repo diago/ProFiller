@@ -52,8 +52,9 @@ var FormFiller = Class.create( {
 		this.elements.each(function(elem){
 			this.elem = $(elem);
 			this.id = this.elem.identify();
-			type = '_' + this.elem.tagName.toLowerCase();
-			this[type]();
+			this.value = this.elem.readAttribute('value');
+			this.type = '_' + this.elem.tagName.toLowerCase();
+			this[this.type]();
 		}.bind(this));
 	
 		this.options.onComplete(this.form);
@@ -68,13 +69,25 @@ var FormFiller = Class.create( {
 	},
 	
 	_find: function(id){
-		var data = id || this.id;
-		return this.data.get(data) || false;		
+		var id = id || this.id;
+		var data = this.data.get(id) || false;
+		if(!data && this.id.endsWith(']')){
+			var exp = new RegExp("\\[.*\\]");
+			var real_id = this.id.sub(exp, '');
+			data = this._find(real_id);
+		}
+		return data;
 	},
 	
 	_input : function() {
 
 		switch(this.elem.readAttribute('type').toLowerCase()){
+		case 'checkbox' :
+			var values = this._find();
+			if(values.indexOf(this.value) !== -1){
+				this.elem.checked = true;
+			}
+			break;
 		case 'radio' :
 			this.elem.checked = this._find();
 			break;
