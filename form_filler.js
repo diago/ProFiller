@@ -85,7 +85,8 @@ var FormFiller = Class.create( {
 			break;
 			
 		case 'radio' :
-			this.elem.checked = this._find();
+			var name = this.elem.readAttribute('name');
+			this.elem.checked = ( this.value == this._find(name) );
 			break;
 			
 		case 'text' :
