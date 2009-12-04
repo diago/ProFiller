@@ -20,108 +20,115 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 
-var FormFiller = Class.create( {
-	initialize : function(form, options) {
-		this.options = Object.extend( {
-			onStart : Prototype.emptyFunction,
-			onComplete : Prototype.emptyFunction
-		}, options || {});
-
-		this.form = $(form);
+var FormFiller = (function(){
+	
+	var FormFiller = Class.create();
+	
+	FormFiller.options = {
+		onStart : Prototype.emptyFunction,
+		onComplete : Prototype.emptyFunction			
+	};
+	
+	FormFiller.prototype = {
+		initialize : function(form, options) {
+			this.options = Object.extend(FormFiller.options, options || {});
 		
-	},
-	/**
-	 * Fills the form with the supplied data
-	 */
-	fill : function(data) {
-	
-		this.data = $H(data);
+			this.form = $(form);
+			this.elements = this.form.getElements();
+			
+		},
+		/**
+		 * Fills the form with the supplied data
+		 */
+		fill : function(data) {
 		
-		this.options.onStart(this.form);
+			this.data = $H(data);
+			
+			this.options.onStart(this.form);
 
-		// used to run through and fill
-		// this is here to recheck for dynamically added elements
-		this.elements = this.form.getElements();
-
-		var type;
-		this.elements.each(function(elem){
-			this.elem = $(elem);
-			this.id = this.elem.identify();
-			this.value = this.elem.readAttribute('value');
-			this.type = '_' + this.elem.tagName.toLowerCase();
-			this[this.type]();
-		}.bind(this));
-	
-		this.options.onComplete(this.form);
-	
-	},
-	
-	/**
-	 * Reset the form with the initial data
-	 */
-	reset : function() {
-		this.form.reset();
-	},
-	
-	_find: function(id){
-		var id = id || this.id;
-		var data = this.data.get(id) || false;
-		if(!data && this.id.include('::')){
-			var exp = new RegExp("\\:\\:.*$");
-			var real_id = this.id.sub(exp, '');
-			data = this._find(real_id);
-		}
-		return data;
-	},
-	
-	_input : function() {
-
-		switch(this.elem.readAttribute('type').toLowerCase()){
-		case 'checkbox' :
-			var values = this._find();
-			if(values.indexOf(this.value) !== -1){
-				this.elem.checked = true;
+			this.elements.each(function(elem){
+				this.elem = $(elem);
+				this.id = this.elem.identify();
+				this.name = this.elem.readAttribute('name').sub('[]', '');;
+				this.value = this.elem.readAttribute('value');
+				this.type = '_' + this.elem.tagName.toLowerCase();
+				this[this.type]();
+			}.bind(this));
+		
+			this.options.onComplete(this.form);
+		
+		},
+		
+		/**
+		 * Reset the form with the initial data
+		 */
+		reset : function() {
+			this.form.reset();
+		},
+		
+		_find: function(id){
+			var id = id || this.id;
+			var data = this.data.get(id) || this.data.get(this.name) || false;
+			if(!data && this.id.include('::')){
+				var exp = new RegExp("\\:\\:.*$");
+				var real_id = this.id.sub(exp, '');
+				data = this._find(real_id);
 			}
-			break;
+			return data;
+		},
+		
+		_input : function() {
+		
+			switch(this.elem.readAttribute('type').toLowerCase()){
+			case 'checkbox' :
+				var values = this._find();
+				if(values.indexOf(this.value) !== -1){
+					this.elem.checked = true;
+				}
+				break;
+				
+			case 'radio' :
+				this.elem.checked = ( this.value == this._find() );
+				break;
+				
+			case 'text' :
+				this.elem.value = this._find();
+				break;
+			}
+		
+		},
+		
+		_select : function() {
 			
-		case 'radio' :
-			var name = this.elem.readAttribute('name');
-			this.elem.checked = ( this.value == this._find(name) );
-			break;
-			
-		case 'text' :
+			var value;
+			var values = [];
+			if(this.elem.multiple){
+				values = this._find();
+			} else {
+				value = this._find();
+			}
+		
+			var options = $A(this.elem.options);	
+			options.each(function(o) {
+		
+				if (o.value == value || $A(values).indexOf(o.value) !== -1) {
+		
+					o.selected = true;
+		
+				}
+		
+			}.bind(this));
+		
+		},
+		
+		_textarea : function() {
+		
 			this.elem.value = this._find();
-			break;
-		}
-	
-	},
-	
-	_select : function() {
 		
-		var value;
-		var values = [];
-		if(this.elem.multiple){
-			values = this._find();
-		} else {
-			value = this._find();
-		}
+		}			
+	};
+	
+	return FormFiller;
+})();
 
-		var options = $A(this.elem.options);	
-		options.each(function(o) {
-	
-			if (o.value == value || $A(values).indexOf(o.value) !== -1) {
-	
-				o.selected = true;
-	
-			}
-	
-		}.bind(this));
-	
-	},
-	
-	_textarea : function() {
-	
-		this.elem.value = this._find();
-	
-	}
-});
+
