@@ -24,6 +24,8 @@ var FormFiller = (function(){
 	
 	var FormFiller = Class.create();
 	
+	FormFiller.Version = '1.0.0';
+	
 	FormFiller.options = {
 		onStart : Prototype.emptyFunction,
 		onComplete : Prototype.emptyFunction			
