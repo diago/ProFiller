@@ -1,38 +1,21 @@
-h1. Form Filler
+h1. ProFiller
 
 h2. Description
 
-Form Filler is used to autocomplete a form using a JSON obect. It requires the Prototype Javascript Framework version 1.6.1 which can be obtained at http://www.prototypejs.org.
+ProFiller is used to autocomplete a form using a JSON obect. It requires the Prototype Javascript Framework version 1.6.1 which can be obtained at http://www.prototypejs.org.
 
 h2. Usage
 
-Form Filler is straight forward. Instantiate the class with the id of the form and use the fill method to populate.
+ProFiller is straight forward. Instantiate the class with the id of the form and use the fill method to populate.
 
 <pre><code class="html">
-  var filler = new FormFiller('formId');
+  var filler = new ProFiller('formId');
   filler.fill(jsonObject);
 </code></pre>
 
 h2. Required ID's
 
-**FormFiller no longer relies on ID's. You can still use ID's and they will override the name attribute.** 
-
-ID's for the form elements should be the same as the name. This can be an issue for **multiselect** boxes but FormFiller will handle those fine. Most backends require a name[] to receive an array of values for these elements. 
-
-In order to fill **checkboxes** you need to follow these guidelines. Example checkbox input:
-
-<pre><code class="html">
-	I have a bike:
-	<input id="vehicle::bike" type="checkbox" name="vehicle[]" value="Bike" />
-	<br />
-	I have a car:
-	<input id="vehicle::car" type="checkbox" name="vehicle[]" value="Car" />
-	<br />
-	I have an airplane:
-	<input id="vehicle::airplane" type="checkbox" name="vehicle[]" value="Airplane" />
-</code></pre>
-
-Notice the id's contain the __name__ of the input with :: and something to make them unique and keep them valid.
+**ProFiller no longer relies on ID's. You can still use ID's and they will override the name attribute.** 
 
 h3. Callbacks
 
@@ -45,7 +28,7 @@ There are two included callbacks
 Pass the callbacks in as options during instantiation.
 
 <pre><code  class="html">
-  var filler = new FormFiller('formId', {
+  var filler = new ProFiller('formId', {
     onStart: function(){
       showAjaxLoader();
     },
@@ -59,5 +42,5 @@ Pass the callbacks in as options during instantiation.
 h3. Methods
 
 |_. Method |_. Description |
-| FormFiller#fill | Used to populate the form with the supplied JSON object |
-| FormFiller#reset | Resets the form to the forms original values (uses Prototypes Form#reset) |
+| ProFiller#fill | Used to populate the form with the supplied JSON object |
+| ProFiller#reset | Resets the form to the forms original values (uses Prototypes Form#reset) |
