@@ -94,7 +94,7 @@ var ProFiller = (function(){
 				break;
 				
 			case 'text' :
-				this.elem.value = this._find();
+				this.elem.value = this._find() || '';
 				break;
 			}
 		
@@ -125,7 +125,7 @@ var ProFiller = (function(){
 		
 		_textarea : function() {
 		
-			this.elem.value = this._find();
+			this.elem.value = this._find() || '';
 		
 		}			
 	};
