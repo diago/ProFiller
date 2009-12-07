@@ -20,20 +20,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 
-var FormFiller = (function(){
+var ProFiller = (function(){
 	
-	var FormFiller = Class.create();
+	var ProFiller = Class.create();
 	
-	FormFiller.Version = '1.0.0';
+	ProFiller.Version = '1.0.0';
 	
-	FormFiller.options = {
+	ProFiller.options = {
 		onStart : Prototype.emptyFunction,
 		onComplete : Prototype.emptyFunction			
 	};
 	
-	FormFiller.prototype = {
+	ProFiller.prototype = {
 		initialize : function(form, options) {
-			this.options = Object.extend(FormFiller.options, options || {});
+			this.options = Object.extend(ProFiller.options, options || {});
 		
 			this.form = $(form);
 			this.elements = this.form.getElements();
@@ -130,7 +130,7 @@ var FormFiller = (function(){
 		}			
 	};
 	
-	return FormFiller;
+	return ProFiller;
 })();
 
 

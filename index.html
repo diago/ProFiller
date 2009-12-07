@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>ProForm</title>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.1/prototype.js"></script>
-		<script type="text/javascript" src="form_filler.js"></script>
+		<script type="text/javascript" src="profiller.js"></script>
 		<script type="text/javascript">
 
 			document.observe('dom:loaded', function(){
@@ -18,7 +18,7 @@
 						"comments": "This is all of my comment"
 							};
 				
-				var filler = new FormFiller('myForm');
+				var filler = new ProFiller('myForm');
 
 				$('fill').observe('click', function(ev){
 					ev.stop();
