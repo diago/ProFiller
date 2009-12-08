@@ -60,9 +60,12 @@ var ProFiller = (function(){
 		
 		_getValue: function(name, hash){
 			var data = $H(hash);
-			var names = name.match(/([\w-]+)/g);
+			var names = Object.isArray(name) ? name : name.match(/([\w-]+)/g);
 			var value = data.get(names[0]);
-			if(names.length>1) return this._getValue(names[1], value);
+			if(names.length>1){
+				names.shift();
+				return this._getValue(names, value);
+			}
 			return value;
 		},
 		

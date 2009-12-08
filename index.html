@@ -14,8 +14,9 @@
 						"name":{"first":"Heath","last":"Padrick"},
 						"age": "21+", "sex": "male", 
 						"vehicle": ["Bike", "Airplane"],
-						"networks": ["GitHub"],
-						"comments": "This is all of my comment"
+						"networks": ["GitHub", "Facebook"],
+						"comments": "This is all of my comment",
+						"car":{"make":{"chrysler":"PT","honda":"Civic","toyota":"Tundra"}}
 							};
 
 				$('fill').observe('click', function(ev){
@@ -91,12 +92,25 @@
 		<p>Comments:</p>
 		<textarea name="comments" rows="5" cols="70"></textarea>
 	
-		<p>
-			<input id="submit" name="Submit" type="submit" value="Submit" />
-		</p>
-	
+	   <p>
+	       Nested Examples:
+	   </p>
+	   <p>
+	       <label for="chrysler">Chrysler:</label>
+	       <input id="chrysler" name="car[make][chrysler]" type="text" value="" />
+	   </p>
+	   <p>
+	       <label for="honda">Honda:</label>
+           <input id="honda" name="car[make][honda]" type="text" value="" />
+       </p>
+       <p>
+           <label for="toyota">Toyota:</label>
+           <input id="toyota" name="car[make][toyota]" type="text" value="" />
+	   </p>
 
-	
+        <p>
+            <input id="submit" name="Submit" type="submit" value="Submit" />
+        </p>	
 	</form>
 	
 	</body>
