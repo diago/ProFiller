@@ -1,46 +1,33 @@
 h1. ProFiller
 
+"Example":http://dev.outlandweb.com/ProFiller/index.html
+
 h2. Description
 
 ProFiller is used to autocomplete a form using a JSON obect. It requires the Prototype Javascript Framework version 1.6.1 which can be obtained at http://www.prototypejs.org.
 
 h2. Usage
 
-ProFiller is straight forward. Instantiate the class with the id of the form and use the fill method to populate.
+ProFiller is added to Prototypes Form methods:
 
 <pre><code class="html">
-  var filler = new ProFiller('formId');
-  filler.fill(jsonObject);
+$('myFormId').fill(json);
 </code></pre>
 
-h2. Required ID's
 
-**ProFiller no longer relies on ID's. You can still use ID's and they will override the name attribute.** 
+h2. Options
 
-h3. Callbacks
+ProFiller will reset the form before filling by default. To override set resetBeforeFill to false:
 
-There are two included callbacks
-
-|_. Calback |_. Parameters |_. Description |
-| onStart | form | triggered when FormFiller#fill is called |
-| onComplete | form | triggered after the form has been filled |
-
-Pass the callbacks in as options during instantiation.
-
-<pre><code  class="html">
-  var filler = new ProFiller('formId', {
-    onStart: function(){
-      showAjaxLoader();
-    },
-    onComplete: function(){
-      hideAjaxLoader();
-    }
-  });  
-  filler.fill(jsonObject);
+<pre><code class="javascript">
+$('myFormId').fill(json, false);
 </code></pre>
 
-h3. Methods
+h2. Alternate use
 
-|_. Method |_. Description |
-| ProFiller#fill | Used to populate the form with the supplied JSON object |
-| ProFiller#reset | Resets the form to the forms original values (uses Prototypes Form#reset) |
+ProFiller can also be instantiated and the **fill** method can be used at will:
+
+<pre><code class="javascript">
+var profiller = new ProFiller('myFormId');
+profiller.fill(json);
+</code></pre>
