@@ -45,8 +45,8 @@ var ProFiller = (function(){
 			this.data = $H(data);
 			
 			this.elements.each(function(elem){
-				name = elem.readAttribute('name').sub('[]', '');
-				value = this.data.get(name);
+				name = elem.readAttribute('name');
+				value = this._getValue(name, this.data);
 				type = elem.readAttribute('type');
 				if(Object.isArray(value)){
 					for(var i=0;i<value.length;i++){
@@ -56,6 +56,14 @@ var ProFiller = (function(){
 			}.bind(this));
 			
 			return this.form;
+		},
+		
+		_getValue: function(name, hash){
+			var data = $H(hash);
+			var names = name.match(/([\w-]+)/g);
+			var value = data.get(names[0]);
+			if(names.length>1) return this._getValue(names[1], value);
+			return value;
 		},
 		
 		_setValue: function(elem, type, value){

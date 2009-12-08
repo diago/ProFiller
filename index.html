@@ -11,25 +11,23 @@
 
 			document.observe('dom:loaded', function(){
 				var json = {
-						"fullName": "Heath Padrick", 
+						"name":{"first":"Heath","last":"Padrick"},
 						"age": "21+", "sex": "male", 
 						"vehicle": ["Bike", "Airplane"],
 						"networks": ["GitHub"],
 						"comments": "This is all of my comment"
 							};
-				
-				var filler = new ProFiller('myForm');
 
 				$('fill').observe('click', function(ev){
 					ev.stop();
 
-					filler.fill(json);
+					$('myForm').fill(json);
 				});
 
 				$('reset').observe('click', function(ev){
 					ev.stop();
 
-					filler.reset();
+					$('myForm').reset();
 				});
 			});
 		</script>
@@ -43,9 +41,13 @@
 	<form id="myForm" action="" method="post" >
 	
 		<p>
-			<label for="fullName">Name:</label>
-			<input name="fullName" type="text" value="" />
+			<label for="firstName">First Name:</label>
+			<input id="firstName" name="name[first]" type="text" value="" />
 		</p>
+        <p>
+            <label for="lastName">Last Name:</label>
+            <input id="lastName" name="name[last]" type="text" value="" />
+        </p>
 		
 		<p>
 			<label for="age">Age:</label>
