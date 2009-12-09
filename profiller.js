@@ -24,7 +24,7 @@ var ProFiller = (function(){
 	
 	var ProFiller = Class.create();
 	
-	ProFiller.Version = "2.1.0";
+	ProFiller.Version = "2.1.1";
 	
 	ProFiller.options = {
 		reset: true
@@ -80,7 +80,7 @@ var ProFiller = (function(){
 				break;
 				
 				default:
-					elem.setValue(value);
+					if(value) elem.setValue(value);
 				break;
 			}
 		}
