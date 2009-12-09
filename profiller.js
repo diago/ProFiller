@@ -24,7 +24,7 @@ var ProFiller = (function(){
 	
 	var ProFiller = Class.create();
 	
-	ProFiller.Version = "2.0.0";
+	ProFiller.Version = "2.1.0";
 	
 	ProFiller.options = {
 		reset: true
@@ -42,11 +42,10 @@ var ProFiller = (function(){
 			var value, name, type;
 			
 			if(this.options.reset) this.form.reset();
-			this.data = $H(data);
 			
 			this.elements.each(function(elem){
 				name = elem.readAttribute('name');
-				value = this._getValue(name, this.data);
+				value = this._getValue(name, data);
 				type = elem.readAttribute('type');
 				if(Object.isArray(value)){
 					for(var i=0;i<value.length;i++){
@@ -60,7 +59,7 @@ var ProFiller = (function(){
 		
 		_getValue: function(name, hash){
 			var data = $H(hash);
-			var names = Object.isArray(name) ? name : name.match(/([\w-]+)/g);
+			var names = Object.isArray(name) ? name : name.match(/([\w-:\.]+)/g);
 			var value = data.get(names[0]);
 			if(names.length>1){
 				names.shift();
