@@ -24,11 +24,11 @@ var ProFiller = (function(){
 	
 	var ProFiller = Class.create();
 	
-	ProFiller.Version = "2.1.3";
+	ProFiller.Version = "2.2.3";
 	
 	ProFiller.options = {
 		reset: true
-	};
+	};	
 	
 	ProFiller.prototype = {
 		initialize: function(form, options){
@@ -52,10 +52,12 @@ var ProFiller = (function(){
 				type = elem.readAttribute('type');
 				if(Object.isArray(value)){
 					for(var i=0;i<value.length;i++){
-						this._setValue(elem, type, value[i])
+						this._setValue(elem, type, value[i]);
 					}
 				} else this._setValue(elem, type, value);
 			}.bind(this));
+			
+			this.form.watch();
 			
 			return this.form;
 		},
@@ -93,6 +95,18 @@ var ProFiller = (function(){
 		fill: function(form, data ,resetBeforeFill){
 			var reset = Object.isUndefined(resetBeforeFill) ? true : resetBeforeFill;
 			return new ProFiller(form,{reset: reset}).fill(data);
+		},
+		watch: function(form){
+			var form = $(form);
+			form.store('profiller', {
+				'form': form.serialize()
+			});
+			return form;
+		},		
+		changed: function(form){
+			var form = $(form);
+			var storage = form.retrieve('profiller', form.serialize());
+			return storage.form !== form.serialize();
 		}
 	});
 	
