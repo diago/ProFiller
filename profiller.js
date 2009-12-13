@@ -24,7 +24,7 @@ var ProFiller = (function(){
 	
 	var ProFiller = Class.create();
 	
-	ProFiller.Version = "2.3.4";
+	ProFiller.Version = "2.2.4";
 	
 	ProFiller.options = {
 		reset: true
@@ -43,7 +43,6 @@ var ProFiller = (function(){
 		fill: function(data){
 			
 			var value, name, type;
-			var data = data || {};
 
 			if(this.options.reset) this.form.reset();
 			
@@ -58,7 +57,9 @@ var ProFiller = (function(){
 				} else this._setValue(elem, type, value);
 			}.bind(this));
 			
-			return this.form.watch();
+			this.form.watch();
+			
+			return this.form;
 		},
 		
 		_getValue: function(name, hash){

@@ -18,11 +18,7 @@ h2. Added Methods
 
 h3. fill
 
-$('myFom').fill(data) - fills the form with the supplied JSON data. If no data is supplied the form will be emptied. 
-
-Also sets up watch so you can easily ask if the form has been changed. 
-
-Returns the form.
+$('myFom').fill(data) - fills the form with the supplied JSON data. Also sets up watch so you can easily ask if the form has been changed. Returns the form.
 
 <pre><code class="javascript">
 $('myFormId').fill(json); // form is now being watched
@@ -33,15 +29,11 @@ if($('myForm').changed()){
 
 h3. watch
 
-$('myForm').watch() - Sets up the form to be watched for changes. Basically fills Element#store with a profiller key filled with the serialized form data. Calling watch() will run through the form and replace the current store or create it if necessary. **You are not required to call fill(). You can use this method anytime to start watching for changes**  
-
-Returns the form.
+$('myForm').watch() - Sets up the form to be watched for changes. Basically fills Element#store with a profiller key filled with the serialized form data. Calling watch() will run through the form and replace the current store or create it if necessary. **You are not required to call fill(). You can use this method anytime to start watching for changes**  Returns the form.
 
 h3. changed
 
-$('myForm').changed() - Tests to see if the form has changed (user added to or removed info form the form). You must call either fill() or watch() for changes to be shown. If niether has been called on the form the current form data is stored as the default data to test. 
-
-Returns boolean.
+$('myForm').changed() - Tests to see if the form has changed (user added to or removed info form the form). You must call either fill() or watch() for changes to be shown. If niether has been called on the form the current form data is stored as the default data to test. Returns boolean.
 
 h2. Options
 
