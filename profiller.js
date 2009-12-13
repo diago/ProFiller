@@ -24,7 +24,7 @@ var ProFiller = (function(){
 	
 	var ProFiller = Class.create();
 	
-	ProFiller.Version = "2.1.2";
+	ProFiller.Version = "2.1.3";
 	
 	ProFiller.options = {
 		reset: true
@@ -32,7 +32,10 @@ var ProFiller = (function(){
 	
 	ProFiller.prototype = {
 		initialize: function(form, options){
-			this.options = Object.extend(ProFiller.options, options || {});
+			this.options = {};
+			Object.extend(this.options, ProFiller.options);
+			Object.extend(this.options, options || {});
+			
 			this.form = $(form);
 			this.elements = this.form.getElements();
 		},
