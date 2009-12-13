@@ -24,7 +24,7 @@ var ProFiller = (function(){
 	
 	var ProFiller = Class.create();
 	
-	ProFiller.Version = "2.2.3";
+	ProFiller.Version = "2.2.4";
 	
 	ProFiller.options = {
 		reset: true
@@ -105,7 +105,7 @@ var ProFiller = (function(){
 		},		
 		changed: function(form){
 			var form = $(form);
-			var storage = form.retrieve('profiller', form.serialize());
+			var storage = form.retrieve('profiller', {'form': form.serialize()});
 			return storage.form !== form.serialize();
 		}
 	});
