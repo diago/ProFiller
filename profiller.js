@@ -24,7 +24,7 @@ var ProFiller = (function(){
 	
 	var ProFiller = Class.create();
 	
-	ProFiller.Version = "2.2.5";
+	ProFiller.Version = "2.2.6";
 	
 	ProFiller.options = {
 		reset: true
@@ -48,7 +48,7 @@ var ProFiller = (function(){
 			
 			this.elements.each(function(elem){
 				name = elem.readAttribute('name');
-				if(!name) throw $continue;
+				if(!name) return;
 				value = this._getValue(name, data);
 				type = elem.readAttribute('type');
 				if(Object.isArray(value)){
